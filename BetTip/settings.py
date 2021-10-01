@@ -132,3 +132,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'core.customer'
 
+MPESA_CONFIG = {
+    'CONSUMER_KEY': 'MXuLgheSmtfxLXmeWoxeT5Mbdg2MVe7G',
+    'CONSUMER_SECRET': 'LBEZGWtDG85UGat2',
+    'HOST_NAME': '  https://664d-41-139-147-210.ngrok.io ',
+    'PASS_KEY': 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919',
+    'SAFARICOM_API': 'https://sandbox.safaricom.co.ke',
+    'SHORT_CODE': '174379'
+
+}
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.shortcuts import get_object_or_404, render
 from django.contrib.auth import authenticate, login
 from . import forms
 import requests
@@ -19,8 +20,11 @@ from core.models import *
 
 # Create your views here.
 def home(request):
-    return render(request, 'index.html')
-
+    games = Game.objects.order_by('date').filter(is_over=True)
+    context = {
+        'games': games
+    }
+    return render(request, 'index.html', context)
 
 
 def sign_in(request):
@@ -55,36 +59,56 @@ def sign_up(request):
     })
 
 
-@login_required(login_url="/sign-in/")
-def profile_page(request):
-    password_form = PasswordChangeForm(request.user)
+# def profile_page(request):
+#    password_form = PasswordChangeForm(request.user)
+#
+#    if request.method == "POST":
+#
+#        if request.POST.get('action') == 'update_password':
+#            password_form = PasswordChangeForm(request.user, request.POST)
+#            if password_form.is_valid():
+#                user = password_form.save()
+#                update_session_auth_hash(request, user)
+#
+#                messages.success(request, 'Your password has been updated')
+#                return redirect(reverse('profile'))
+#
+#            request.user.save()
+#            return redirect(reverse('profile'))
+#
+#    return render(request, 'profile.html', {
+#        "password_form": password_form
+#    })
 
-    if request.method == "POST":
-
-        if request.POST.get('action') == 'update_password':
-            password_form = PasswordChangeForm(request.user, request.POST)
-            if password_form.is_valid():
-                user = password_form.save()
-                update_session_auth_hash(request, user)
-
-                messages.success(request, 'Your password has been updated')
-                return redirect(reverse('profile'))
-
-            request.user.save()
-            return redirect(reverse('profile'))
-
-    return render(request, 'profile.html', {
-        "password_form": password_form
-    })
 
 ## Initialize SDK
-#username = 'sandbox'
-#api_key = "a848a8aaeb268d06fbdd443fd8d8ec344edf920958b2443b5a7e9a68dd6ecdef"
-#africastalking.initialize(username,api_key)
-#var = africastalking.Payment
+# username = 'sandbox'
+# api_key = "a848a8aaeb268d06fbdd443fd8d8ec344edf920958b2443b5a7e9a68dd6ecdef"
+# africastalking.initialize(username,api_key)
+# var = africastalking.Payment
 ## Initialize a service e.g. SMS
-#sms = africastalking.SMS
+# sms = africastalking.SMS
 
 ## Use the service synchronously
-#response = sms.send("Hello Message!", [customer.phone_number])
-#print(response)
+# response = sms.send("Hello Message!", [customer.phone_number])
+# print(response)
+
+
+# import requests
+# url = "https://sandbox.safaricom.co.ke/oauth/v1/generate"
+# querystring = {"grant_type":"client_credentials"}
+# payload = ""
+# headers = {
+#     "Authorization": "Basic SWZPREdqdkdYM0FjWkFTcTdSa1RWZ2FTSklNY001RGQ6WUp4ZVcxMTZaV0dGNFIzaA=="
+# }
+# response = requests.request("GET", url, data=payload, headers=headers, params=querystring)
+# print(response.text)
+
+@login_required(login_url="/sign-in/")
+def profile_page(request):
+    games = Game.objects.filter(is_over=False)
+
+    context = {
+        'games': games,
+    }
+    return render(request, 'profile.html', context)

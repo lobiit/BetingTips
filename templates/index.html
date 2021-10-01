@@ -254,12 +254,12 @@
     <div class="container home-past">
         <h2 class="text-uppercase past-tips-title" style="color: black">Past Winning Tips</h2>
 
-                    <div class="past-tips px-3 py-3 shadow-lg">
-                <h2 class="text-white w3-xlarge" style="font-family: 'Space Mono', monospace; color: steelblue">Monday 27 September, 2021</h2>
+                    <div class="past-tips px-3 py-3 shadow-lg" style="background-color: steelblue">
+                <h2 class="text-white w3-xlarge" style="font-family: 'Space Mono', monospace; color: black">Monday 27 September, 2021</h2>
                 <div class="col-md-12 search-table-col">
                     <!-- <h3 class="text-white" style="font-family: Montserrat, sans-serif;">VIP Tips<span class="float-right text-danger total-odds">Total Odds: 357.98</span></h3> -->
-                    <div class="table-responsive table table-hover table-borderless results">
-                                                    <table class="table table-hover">
+                    <div class="table-responsive table table-hover table-borderless results" >
+                                                    <table class="table table-hover" style="background-color: steelblue">
                                 <thead class="bill-header cs" style="color: black; background-color: steelblue">
                                     <tr>
                                         <th id="trs-hd">&nbsp;No.</th>
@@ -272,32 +272,26 @@
                                         <th id="trs-hd">Won</th>
                                     </tr>
                                 </thead>
+                                    <tbody>
+                                    {% if games %}
+                                            {% for game in games %}
+                                        <tr style="color: black">
 
-                                        <tr>
                                             <td>
-                                                13.</td>
-                                            <td>53173</td>
-                                            <td>Atyrau - Tobol</td>
-                                            <td>2</td>
-                                            <!-- <td></td>-->
-                                            <td>15:00</td>
-                                            <td>0:1(0:1)</td>
+                                                {{ game.number }}</td>
+                                            <td>{{ game.game_id }}</td>
+                                            <td>{{ game.home_team }} - {{ game.away_team }}</td>
+                                            <td>{{ game.tip }}</td>
+                                            <td>{{ game.date.date }}</td>
+                                            <td>{{ game.time.time }}</td>
+                                            <td>{{ game.results }}</td>
                                             <td><i class="fa fa-check-circle tick-icon"></i></td>
+
                                         </tr>
+                                            {% endfor %}
+                                    {% endif %}
                                     </tbody>
-                                                                <tbody style="text-align:center;">
-                                        <tr>
-                                            <td>
-                                                14.</td>
-                                            <td>77825</td>
-                                            <td>Akzhaiyk Uralsk - Kaisar Kyzylorda</td>
-                                            <td>GG</td>
-                                            <!-- <td></td>-->
-                                            <td>14:00</td>
-                                            <td>1:1(0:0)</td>
-                                            <td><i class="fa fa-check-circle tick-icon"></i></td>
-                                        </tr>
-                                    </tbody>
+
                                                         </table>
                     </div>
                     <!-- <p class="text-white">Total Odds: 5178.1192192728 </p> -->
