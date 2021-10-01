@@ -33,7 +33,7 @@ class Game(models.Model):
     home_team = models.CharField(max_length=100)
     away_team = models.CharField(max_length=100)
     tip = models.CharField(max_length=20)
-    odds = models.FloatField(max_length=20)
+    odds = models.FloatField(max_length=20, default=1.0)
     date = models.DateTimeField(default=datetime.date.today)
     time = models.DateTimeField(default=timezone.now)
     results = models.CharField(max_length=100)
