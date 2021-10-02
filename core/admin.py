@@ -26,5 +26,11 @@ class CustomUserAdmin(UserAdmin):
     ordering = ('phone_number',)
 
 
-admin.site.register(Game)
+class GameAdmin(admin.ModelAdmin):
+    list_display = ['game_id', 'home_team', 'away_team', 'is_over', 'date']
+    list_filter = ['date', 'is_over']
+    search_fields = ['game_id', 'home_team', 'away_team']
+
+
+admin.site.register(Game, GameAdmin)
 admin.site.register(customer, CustomUserAdmin)
