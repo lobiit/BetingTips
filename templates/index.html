@@ -99,12 +99,8 @@
                                                                     <li style="font-family: Montserrat, sans-serif; color: black"> + 36 Odds</li>
                                                                 <li style="font-family: Montserrat, sans-serif; color: black;"> Upto 7 Games</li>
                             </ul>
-                            <form action="{% url "submit" %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="action" value="7">
-                                <input type="hidden" name="amount" value="100">
-                            <button class="btn btn-outline-info mb-3" type="submit" style="font-family: Montserrat, sans-serif;" data-toggle="modal" data-target="#tips-modal" data-whatever="HT/FT Bets,7,100" name="action" value="7">Get Now</button>
-                            </form>
+
+                            <button class="btn btn-outline-info mb-3" type="button" style="font-family: Montserrat, sans-serif;" data-toggle="modal" data-target="#tips-modal2" data-whatever="HT/FT Bets,7,100" name="action" value="7">Get Now</button>
                         </div>
                     </div>
                 </div>
@@ -288,6 +284,63 @@
         </div>
     </div>
 <!-- Daily Bets Model -->
+    <div class="modal fade" id="tips-modal1" style="width: 100%;" role="dialog">
+        <div class="modal-dialog modal-lg" style="width: 100%;">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="background: linear-gradient( 109.6deg, rgba(3,20,53,0.99) 15.2%, rgba(3,20,255,0.99) 96.8% );">
+                    <h4 class="modal-title text-white" style="font-family: 'Space Mono', monospace;"></h4>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row" style="margin-top: -10px;">
+                        <div class="col-12 col-md-6 col-lg-6 col-xl-6">
+
+                            <h4 class="mb-2 mt-4 pb-1 border-bottom" style="font-weight: 500;text-align:center;font-family: 'Space Mono', monospace;">Pay Online Now
+                            </h4>
+
+                            <ul class="list-group" style="margin-left:-12px">
+                            <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Have your phone unlocked.</li>
+                                <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> You will be alerted to enter Mpesa Pin. </li>
+                                <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Enter Phone Number To Pay Ksh. <b><span id="price" class="price w3-large"></span></b> :<br>
+                                    <div class="form-group">
+                                        <form action="{% url 'submit' %}" method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="amount" value="50">
+                                        <input type="text" class="form-control mt-2 ml-4" style="width: 80%;" id="phone_number" placeholder="2547xxxxxxx" name="phone_number">
+                                        <div class="no-phone ml-4"></div>
+                                        </form>
+                                    </div>
+                                </li>
+                            </ul>
+                            <!-- <p>Please enter your mpesa Pin to confirm payment.</p> -->
+
+                            <button type="submit" class="btn btn-outline-info text-black ml-4" id="pay-btn">Pay Now</button>
+
+                            <div class="append-response"></div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-6 col-xl-6">
+                        <h4 class="mb-2 pb-1 mt-4 border-bottom" style="font-weight: 500;text-align:center;font-family: 'Space Mono', monospace;">Or Pay Via Mpesa
+                            </h4>
+                        <ul class="list-group" style="margin-left:-12px">
+                                <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Go to <b>Mpesa Menu </b></li>
+                                <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Select <b> Lipa Na Mpesa </b> then <b>Buy Goods and Services</b></li>
+                                <li class="list-group-item border-0"> <img src="assets/img/till_number.png" style="width: 150px;" alt="Till Number"> </li>
+                                <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Enter Till Number <b> 00000 </b></li>
+                                <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Enter amount Kshs. <b><span class="price w3-large"></span></b> and send.  </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer" style="background: linear-gradient( 109.6deg, rgba(3,20,53,0.99) 15.2%, rgba(3,20,255,0.99)  96.8% );">
+                    <button type="button" class="btn btn-outline-info text-white" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- HT/FT  Bets Model -->
     <div class="modal fade" id="tips-modal1" style="width: 100%;" role="dialog">
         <div class="modal-dialog modal-lg" style="width: 100%;">
             <!-- Modal content-->
