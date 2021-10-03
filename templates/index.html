@@ -225,25 +225,25 @@
 
                             <h4 class="mb-2 mt-4 pb-1 border-bottom" style="font-weight: 500;text-align:center;font-family: 'Space Mono', monospace;">Pay Online Now
                             </h4>
-
+                                 <form action="{% url 'submit' %}" method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
                             <ul class="list-group" style="margin-left:-12px">
                             <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Have your phone unlocked.</li>
                                 <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> You will be alerted to enter Mpesa Pin. </li>
                                 <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Enter Phone Number To Pay Ksh. <b><span id="price" class="price w3-large"></span></b> :<br>
                                     <div class="form-group">
-                                        <form action="{% url 'submit' %}" method="POST" enctype="multipart/form-data">
-                                            {% csrf_token %}
+
                                             <input type="hidden" name="amount" value="50">
                                         <input type="text" class="form-control mt-2 ml-4" style="width: 80%;" id="phone_number" placeholder="2547xxxxxxx" name="phone_number">
                                         <div class="no-phone ml-4"></div>
-                                        </form>
+
                                     </div>
                                 </li>
                             </ul>
                             <!-- <p>Please enter your mpesa Pin to confirm payment.</p> -->
 
                             <button type="submit" class="btn btn-outline-info text-black ml-4" id="pay-btn">Pay Now</button>
-
+                             </form>
                             <div class="append-response"></div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-6 col-xl-6">
@@ -283,18 +283,18 @@
 
                             <h4 class="mb-2 mt-4 pb-1 border-bottom" style="font-weight: 500;text-align:center;font-family: 'Space Mono', monospace;">Pay Online Now
                             </h4>
-
+                            <form action="{% url 'submit' %}" method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
                             <ul class="list-group" style="margin-left:-12px">
                             <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Have your phone unlocked.</li>
                                 <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> You will be alerted to enter Mpesa Pin. </li>
                                 <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Enter Phone Number To Pay Ksh. <b><span id="price" class="price w3-large"></span></b> :<br>
                                     <div class="form-group">
-                                        <form action="{% url 'submit' %}" method="POST" enctype="multipart/form-data">
-                                            {% csrf_token %}
+
                                             <input type="hidden" name="amount" value="100">
                                         <input type="text" class="form-control mt-2 ml-4" style="width: 80%;" id="phone_number" placeholder="2547xxxxxxx" name="phone_number">
                                         <div class="no-phone ml-4"></div>
-                                        </form>
+
                                     </div>
                                 </li>
                             </ul>
@@ -303,6 +303,7 @@
                             <button type="submit" class="btn btn-outline-info text-black ml-4" id="pay-btn">Pay Now</button>
 
                             <div class="append-response"></div>
+                                  </form>
                         </div>
                         <div class="col-12 col-md-6 col-lg-6 col-xl-6">
                         <h4 class="mb-2 pb-1 mt-4 border-bottom" style="font-weight: 500;text-align:center;font-family: 'Space Mono', monospace;">Or Pay Via Mpesa
@@ -341,7 +342,8 @@
 
                             <h4 class="mb-2 mt-4 pb-1 border-bottom" style="font-weight: 500;text-align:center;font-family: 'Space Mono', monospace;">Pay Online Now
                             </h4>
-
+                            <form action="{% url 'submit' %}" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
                             <ul class="list-group" style="margin-left:-12px">
                             <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Have your phone unlocked.</li>
                                 <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> You will be alerted to enter Mpesa Pin. </li>
@@ -352,14 +354,14 @@
                                             <input type="hidden" name="amount" value="200">
                                         <input type="text" class="form-control mt-2 ml-4" style="width: 80%;" id="phone_number" placeholder="2547xxxxxxx" name="phone_number">
                                         <div class="no-phone ml-4"></div>
-                                        </form>
+
                                     </div>
                                 </li>
                             </ul>
                             <!-- <p>Please enter your mpesa Pin to confirm payment.</p> -->
 
                             <button type="submit" class="btn btn-outline-info text-black ml-4" id="pay-btn">Pay Now</button>
-
+                            </form>
                             <div class="append-response"></div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-6 col-xl-6">
@@ -399,18 +401,18 @@
 
                             <h4 class="mb-2 mt-4 pb-1 border-bottom" style="font-weight: 500;text-align:center;font-family: 'Space Mono', monospace;">Pay Online Now
                             </h4>
-
+                            <form action="{% url 'submit' %}" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
                             <ul class="list-group" style="margin-left:-12px">
                             <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Have your phone unlocked.</li>
                                 <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> You will be alerted to enter Mpesa Pin. </li>
                                 <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Enter Phone Number To Pay Ksh. <b><span id="price" class="price w3-large"></span></b> :<br>
                                     <div class="form-group">
-                                        <form action="{% url 'submit' %}" method="POST" enctype="multipart/form-data">
-                                            {% csrf_token %}
+
                                             <input type="hidden" name="amount" value="150">
                                         <input type="text" class="form-control mt-2 ml-4" style="width: 80%;" id="phone_number" placeholder="2547xxxxxxx" name="phone_number">
                                         <div class="no-phone ml-4"></div>
-                                        </form>
+
                                     </div>
                                 </li>
                             </ul>
@@ -419,6 +421,7 @@
                             <button type="submit" class="btn btn-outline-info text-black ml-4" id="pay-btn">Pay Now</button>
 
                             <div class="append-response"></div>
+                            </form>
                         </div>
                         <div class="col-12 col-md-6 col-lg-6 col-xl-6">
                         <h4 class="mb-2 pb-1 mt-4 border-bottom" style="font-weight: 500;text-align:center;font-family: 'Space Mono', monospace;">Or Pay Via Mpesa
@@ -457,18 +460,18 @@
 
                             <h4 class="mb-2 mt-4 pb-1 border-bottom" style="font-weight: 500;text-align:center;font-family: 'Space Mono', monospace;">Pay Online Now
                             </h4>
-
+                            <form action="{% url 'submit' %}" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
                             <ul class="list-group" style="margin-left:-12px">
                             <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Have your phone unlocked.</li>
                                 <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> You will be alerted to enter Mpesa Pin. </li>
                                 <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Enter Phone Number To Pay Ksh. <b><span id="price" class="price w3-large"></span></b> :<br>
                                     <div class="form-group">
-                                        <form action="{% url 'submit' %}" method="POST" enctype="multipart/form-data">
-                                            {% csrf_token %}
+
                                             <input type="hidden" name="amount" value="100">
                                         <input type="text" class="form-control mt-2 ml-4" style="width: 80%;" id="phone_number" placeholder="2547xxxxxxx" name="phone_number">
                                         <div class="no-phone ml-4"></div>
-                                        </form>
+
                                     </div>
                                 </li>
                             </ul>
@@ -477,6 +480,7 @@
                             <button type="submit" class="btn btn-outline-info text-black ml-4" id="pay-btn">Pay Now</button>
 
                             <div class="append-response"></div>
+                            </form>
                         </div>
                         <div class="col-12 col-md-6 col-lg-6 col-xl-6">
                         <h4 class="mb-2 pb-1 mt-4 border-bottom" style="font-weight: 500;text-align:center;font-family: 'Space Mono', monospace;">Or Pay Via Mpesa
@@ -515,18 +519,18 @@
 
                             <h4 class="mb-2 mt-4 pb-1 border-bottom" style="font-weight: 500;text-align:center;font-family: 'Space Mono', monospace;">Pay Online Now
                             </h4>
-
+                            <form action="{% url 'submit' %}" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
                             <ul class="list-group" style="margin-left:-12px">
                             <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Have your phone unlocked.</li>
                                 <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> You will be alerted to enter Mpesa Pin. </li>
                                 <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Enter Phone Number To Pay Ksh. <b><span id="price" class="price w3-large"></span></b> :<br>
                                     <div class="form-group">
-                                        <form action="{% url 'submit' %}" method="POST" enctype="multipart/form-data">
-                                            {% csrf_token %}
+
                                             <input type="hidden" name="amount" value="100">
                                         <input type="text" class="form-control mt-2 ml-4" style="width: 80%;" id="phone_number" placeholder="2547xxxxxxx" name="phone_number">
                                         <div class="no-phone ml-4"></div>
-                                        </form>
+
                                     </div>
                                 </li>
                             </ul>
@@ -535,6 +539,7 @@
                             <button type="submit" class="btn btn-outline-info text-black ml-4" id="pay-btn">Pay Now</button>
 
                             <div class="append-response"></div>
+                            </form>
                         </div>
                         <div class="col-12 col-md-6 col-lg-6 col-xl-6">
                         <h4 class="mb-2 pb-1 mt-4 border-bottom" style="font-weight: 500;text-align:center;font-family: 'Space Mono', monospace;">Or Pay Via Mpesa
@@ -573,18 +578,17 @@
 
                             <h4 class="mb-2 mt-4 pb-1 border-bottom" style="font-weight: 500;text-align:center;font-family: 'Space Mono', monospace;">Pay Online Now
                             </h4>
-
+                            <form action="{% url 'submit' %}" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
                             <ul class="list-group" style="margin-left:-12px">
                             <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Have your phone unlocked.</li>
                                 <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> You will be alerted to enter Mpesa Pin. </li>
                                 <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Enter Phone Number To Pay Ksh. <b><span id="price" class="price w3-large"></span></b> :<br>
                                     <div class="form-group">
-                                        <form action="{% url 'submit' %}" method="POST" enctype="multipart/form-data">
-                                            {% csrf_token %}
+
                                             <input type="hidden" name="amount" value="100">
                                         <input type="text" class="form-control mt-2 ml-4" style="width: 80%;" id="phone_number" placeholder="2547xxxxxxx" name="phone_number">
                                         <div class="no-phone ml-4"></div>
-                                        </form>
                                     </div>
                                 </li>
                             </ul>
@@ -593,6 +597,7 @@
                             <button type="submit" class="btn btn-outline-info text-black ml-4" id="pay-btn">Pay Now</button>
 
                             <div class="append-response"></div>
+                            </form>
                         </div>
                         <div class="col-12 col-md-6 col-lg-6 col-xl-6">
                         <h4 class="mb-2 pb-1 mt-4 border-bottom" style="font-weight: 500;text-align:center;font-family: 'Space Mono', monospace;">Or Pay Via Mpesa
@@ -631,18 +636,18 @@
 
                             <h4 class="mb-2 mt-4 pb-1 border-bottom" style="font-weight: 500;text-align:center;font-family: 'Space Mono', monospace;">Pay Online Now
                             </h4>
-
+                            <form action="{% url 'submit' %}" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
                             <ul class="list-group" style="margin-left:-12px">
                             <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Have your phone unlocked.</li>
                                 <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> You will be alerted to enter Mpesa Pin. </li>
                                 <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Enter Phone Number To Pay Ksh. <b><span id="price" class="price w3-large"></span></b> :<br>
                                     <div class="form-group">
-                                        <form action="{% url 'submit' %}" method="POST" enctype="multipart/form-data">
-                                            {% csrf_token %}
+
                                             <input type="hidden" name="amount" value="100">
                                         <input type="text" class="form-control mt-2 ml-4" style="width: 80%;" id="phone_number" placeholder="2547xxxxxxx" name="phone_number">
                                         <div class="no-phone ml-4"></div>
-                                        </form>
+
                                     </div>
                                 </li>
                             </ul>
@@ -651,6 +656,7 @@
                             <button type="submit" class="btn btn-outline-info text-black ml-4" id="pay-btn">Pay Now</button>
 
                             <div class="append-response"></div>
+                            </form>
                         </div>
                         <div class="col-12 col-md-6 col-lg-6 col-xl-6">
                         <h4 class="mb-2 pb-1 mt-4 border-bottom" style="font-weight: 500;text-align:center;font-family: 'Space Mono', monospace;">Or Pay Via Mpesa
