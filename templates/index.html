@@ -43,7 +43,7 @@
     <!-- <p class="w3-text-white" style="width: 100%;" style="font-weight:500"><i class="fa fa-phone"></i> : 0742 884 997 / 0754 281 001</p> -->
         <a class="navbar-brand" href="/">
         </a>
-
+{% if not request.user.is_authenticated  %}
         <div class="" id="navcol-1">
             <ul class="nav navbar-nav ml-auto">
             <!-- <li>
@@ -58,6 +58,11 @@
                 <li class="nav-item"></li>
             </ul>
         </div>
+{% else %}
+    <form class="form-inline">
+      <a href="/sign-out" class="btn btn-info" style="color: white">Sign Out</a>
+    </form>
+{% endif %}
     </div>
     </nav>
 
@@ -233,7 +238,7 @@
                                 <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Enter Phone Number To Pay Ksh. <b><span id="price" class="price w3-large"></span></b> :<br>
                                     <div class="form-group">
 
-                                            <input type="hidden" name="amount" value="50">
+                                            <input type="hidden" name="amount" value="1">
                                         <input type="text" class="form-control mt-2 ml-4" style="width: 80%;" id="phone_number" placeholder="2547xxxxxxx" name="phone_number">
                                         <div class="no-phone ml-4"></div>
 
