@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1l@2^z%3!z!1=)@53p$twjqk4y2hrvdxjbm+2l6n^am5bh1-m9'
+SECRET_KEY = '1l@2^z%3!z!1=)@53p$twjqk4y2hrbvnvge567vdxjbm+2l6n^am5bh1-m9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap4',
     'mpesa',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -55,21 +56,21 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'BetTip.urls'
 
 TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
+     {
+         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+         'DIRS': [os.path.join(BASE_DIR, 'templates')],
+         'APP_DIRS': True,
+         'OPTIONS': {
+             'context_processors': [
+                 'django.template.context_processors.debug',
+                 'django.template.context_processors.request',
+                 'django.contrib.auth.context_processors.auth',
+                 'django.contrib.messages.context_processors.messages',
+             ],
+         },
+     },
+ ]
+
 
 WSGI_APPLICATION = 'BetTip.wsgi.application'
 
@@ -133,9 +134,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'core.customer'
 
+# Messages
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
+
+
 MPESA_CONFIG = {
-    'CONSUMER_KEY': 'MXuLgheSmtfxLXmeWoxeT5Mbdg2MVe7G',
-    'CONSUMER_SECRET': 'LBEZGWtDG85UGat2',
+    'CONSUMER_KEY': 'tMlHY1XtKWID53XZJ6JmbiIiTCa9YGDQ',
+    'CONSUMER_SECRET': '2fYks6aAFghwSbOI',
     'HOST_NAME': '  https://664d-41-139-147-210.ngrok.io ',
     'PASS_KEY': 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919',
     'SAFARICOM_API': 'https://sandbox.safaricom.co.ke',
