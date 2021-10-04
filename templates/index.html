@@ -238,7 +238,7 @@
                                 <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Enter Phone Number To Pay Ksh. <b><span id="price" class="price w3-large"></span></b> :<br>
                                     <div class="form-group">
 
-                                            <input type="hidden" name="amount" value="1">
+                                            <input type="hidden" name="amount" value="50">
                                         <input type="text" class="form-control mt-2 ml-4" style="width: 80%;" id="phone_number" placeholder="2547xxxxxxx" name="phone_number">
                                         <div class="no-phone ml-4"></div>
 
@@ -344,8 +344,6 @@
                                 <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> You will be alerted to enter Mpesa Pin. </li>
                                 <li class="list-group-item border-0"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Enter Phone Number To Pay Ksh. <b><span id="price" class="price w3-large"></span></b> :<br>
                                     <div class="form-group">
-                                        <form action="{% url 'submit' %}" method="POST" enctype="multipart/form-data">
-                                            {% csrf_token %}
                                             <input type="hidden" name="amount" value="200">
                                         <input type="text" class="form-control mt-2 ml-4" style="width: 80%;" id="phone_number" placeholder="2547xxxxxxx" name="phone_number">
                                         <div class="no-phone ml-4"></div>
