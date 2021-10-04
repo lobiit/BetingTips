@@ -19,6 +19,7 @@ from core.models import *
 
 
 # Create your views here.
+@login_required(login_url="/sign-in/")
 def home(request):
     games = Game.objects.order_by('date').filter(is_over=True)
     context = {

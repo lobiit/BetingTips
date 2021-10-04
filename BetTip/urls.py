@@ -27,5 +27,5 @@ urlpatterns = [
     path('sign-out/', auth_views.LogoutView.as_view(next_page="/")),
     path('sign-up/', views.sign_up),
     path('accounts/profile/', views.profile_page, name="profile"),
-    path('mpesa/', include(mpesa_urls)),
+    path('payments/', include(mpesa_urls)),
 ]

@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['*', ]
 # Application definition
 
 INSTALLED_APPS = [
-    'core',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap4',
     'mpesa',
+    'core.apps.CoreConfig',
     'rest_framework',
 ]
 
@@ -145,7 +146,7 @@ MESSAGE_TAGS = {
 MPESA_CONFIG = {
     'CONSUMER_KEY': 'tMlHY1XtKWID53XZJ6JmbiIiTCa9YGDQ',
     'CONSUMER_SECRET': '2fYks6aAFghwSbOI',
-    'HOST_NAME': '  https://664d-41-139-147-210.ngrok.io ',
+    'HOST_NAME': 'https://cf51-105-161-165-133.ngrok.io',
     'PASS_KEY': 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919',
     'SAFARICOM_API': 'https://sandbox.safaricom.co.ke',
     'SHORT_CODE': '174379'

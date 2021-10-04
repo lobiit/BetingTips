@@ -668,6 +668,25 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 <script src="{% static 'js/index.js?v=3' %}"> </script>
 <script src="{%  static 'js/fix-navbar.js' %}"> </script>
+    <script src="https://unpkg.com/bootoast@1.0.1/dist/bootoast.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/bootoast@1.0.1/dist/bootoast.min.css">
+  <script>
+    function toast(message, type) {
+      bootoast.toast({
+        position: 'leftBottom',
+        message,
+        type,
+      });
+    }
+
+    {% if messages %}
+
+    {% for message in messages %}
+    toast('{{ message }}', '{{ message.tags }}');
+    {% endfor %}
+
+    {% endif %}
+  </script>
 </body>
 
 </html>
