@@ -37,8 +37,12 @@ from core.models import *
 @login_required(login_url="/sign-in/")
 def home(request):
     games = Game.objects.order_by('date').filter(is_over=True)
+    group = Group.objects.filter(is_published=True)
+    customer = customer.objects.all
     context = {
-        'games': games
+        'games': games,
+        'group': group,
+        'customer': customer
     }
     return render(request, 'index.html', context)
 

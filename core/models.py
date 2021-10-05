@@ -59,14 +59,15 @@ class customer(AbstractBaseUser, PermissionsMixin):
 class Group(models.Model):
     title = models.CharField(max_length=100)
     amount = models.FloatField(max_length=20)
-    number = models.IntegerField(max_length=10)
+    number = models.IntegerField()
+    is_published = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
 
 
 class Game(models.Model):
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, null=True)
     number = models.IntegerField()
     game_id = models.AutoField(primary_key=True)
     home_team = models.CharField(max_length=100)
