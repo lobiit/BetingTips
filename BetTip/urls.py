@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from core import views
 from django.contrib.auth import views as auth_views
+from core.views import SubmitView, CheckTransaction, ConfirmView, CheckTransactionOnline
 from django.views.generic import TemplateView
 from mpesa.urls import mpesa_urls
 
@@ -27,5 +28,9 @@ urlpatterns = [
     path('sign-out/', auth_views.LogoutView.as_view(next_page="/")),
     path('sign-up/', views.sign_up),
     path('accounts/profile/', views.profile_page, name="profile"),
-    path('payments/', include(mpesa_urls)),
+    # path('payments/', include(mpesa_urls)),
+    path('submit/', SubmitView.as_view(), name='submit'),
+    path('confirm/', ConfirmView.as_view(), name='confirm'),
+    path('check-online/', CheckTransactionOnline.as_view(), name='confirm-online'),
+    path('check-transaction/', CheckTransaction.as_view(), name='check_transaction'),
 ]

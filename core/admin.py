@@ -1,7 +1,10 @@
+from __future__ import unicode_literals
+
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import *
 from .forms import CustomUserCreationForm, CustomUserChangeForm
+from .models import PaymentTransaction, Wallet
 
 
 # Register your models here.
@@ -32,5 +35,17 @@ class GameAdmin(admin.ModelAdmin):
     search_fields = ['game_id', 'home_team', 'away_team']
 
 
+# Register your models here.
+
+class PaymentTransactionAdmin(admin.ModelAdmin):
+    list_display = ("phone_number", "amount", "isFinished",
+                    "isSuccessFull", "trans_id", 'date_created', 'date_modified')
+    list_filter = ('isSuccessFull', 'date_created')
+    list_per_page = 30
+    search_fields = ('phone_number',)
+
+
 admin.site.register(Game, GameAdmin)
 admin.site.register(customer, CustomUserAdmin)
+admin.site.register(PaymentTransaction, PaymentTransactionAdmin)
+admin.site.register(Wallet)

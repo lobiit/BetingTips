@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap4',
-    'mpesa',
     'core.apps.CoreConfig',
     'rest_framework',
 ]
@@ -141,7 +140,8 @@ from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
-
+from rest_framework.settings import APISettings
+from django.conf import settings
 
 MPESA_CONFIG = {
     'CONSUMER_KEY': 'tMlHY1XtKWID53XZJ6JmbiIiTCa9YGDQ',
@@ -152,6 +152,19 @@ MPESA_CONFIG = {
     'SHORT_CODE': '174379'
 
 }
+
+USER_SETTINGS = getattr(settings, 'MPESA_CONFIG', None)
+DEFAULTS = {
+    'CONSUMER_KEY': None,
+    'CONSUMER_SECRET': None,
+    'CERTIFICATE_FILE': None,
+    'HOST_NAME': None,
+    'PASS_KEY': None,
+    'SAFARICOM_API': 'https://sandbox.safaricom.co.ke',
+    'SHORT_CODE': None,
+}
+
+api_settings = APISettings(USER_SETTINGS, DEFAULTS, None)
 
 try:
     from .local_settings import *
