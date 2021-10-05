@@ -191,7 +191,7 @@ class CheckTransactionOnline(APIView):
                 status_response = check_payment_status(transaction.checkoutRequestID)
                #return JsonResponse(
                #    status_response, status=200)
-                return redirect(reverse('profile') )
+                # return redirect(reverse('profile') )
             else:
                 return JsonResponse({
                     "message": "Server Error. Transaction not found",

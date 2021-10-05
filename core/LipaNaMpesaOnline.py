@@ -115,7 +115,7 @@ def sendSTK(phone_number, amount, orderId=0, transaction_id=None, shortcode=None
     else:
         raise Exception("Error sending MPesa stk push", json_response)
 
-    return redirect(reverse('profile'))
+    #return redirect(reverse('profile'))
 
 
 def check_payment_status(checkout_request_id, shortcode=None):
