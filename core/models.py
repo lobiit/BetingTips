@@ -58,7 +58,7 @@ class customer(AbstractBaseUser, PermissionsMixin):
 
 class Group(models.Model):
     title = models.CharField(max_length=100)
-    amount = models.DecimalField(max_digits=6,decimal_places=2,  default=0)
+    amount = models.CharField(max_length=10)
     number = models.IntegerField()
     is_published = models.BooleanField(default=True)
 
