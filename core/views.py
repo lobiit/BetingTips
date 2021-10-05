@@ -38,7 +38,7 @@ from core.models import *
 def home(request):
     games = Game.objects.order_by('date').filter(is_over=True)
     group = Group.objects.filter(is_published=True)
-    customer = customer.objects.all
+    customers = customer.objects.all
     context = {
         'games': games,
         'group': group,

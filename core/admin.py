@@ -34,6 +34,10 @@ class GameAdmin(admin.ModelAdmin):
     search_fields = ['game_id', 'home_team', 'away_team']
 
 
+class GroupAdmin(admin.ModelAdmin):
+    list_display = ['title']
+
+
 # Register your models here.
 
 class PaymentTransactionAdmin(admin.ModelAdmin):
@@ -48,3 +52,4 @@ admin.site.register(Game, GameAdmin)
 admin.site.register(customer, CustomUserAdmin)
 admin.site.register(PaymentTransaction, PaymentTransactionAdmin)
 admin.site.register(Wallet)
+admin.site.register(Group, GroupAdmin)

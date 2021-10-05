@@ -81,19 +81,19 @@
             {% for x in group %}
             <div class="col">
                     <div class="card card-pricing style_prevu_kit text-center px-3 mb-4">
-                        <span class="h6 w-60 mx-auto px-4 py-1 text-white shadow-sm" style="background-color: steelblue;font-size: 25px;font-family: 'Space Mono', monospace;">{{ group.title }}</span>
+                        <span class="h6 w-60 mx-auto px-4 py-1 text-white shadow-sm" style="background-color: steelblue;font-size: 25px;font-family: 'Space Mono', monospace;">{{ x.title }}</span>
                         <div class="bg-transparent card-header pt-4 border-0">
-                            <h3 class="h3 font-weight-normal text-info text-center mb-0" style="font-family: Montserrat, sans-serif;">Kshs {{ group.amount }}</h3>
+                            <h3 class="h3 font-weight-normal text-info text-center mb-0" style="font-family: Montserrat, sans-serif;">Kshs {{ x.amount }}</h3>
                         </div>
                         <div class="card-body pt-0">
                             <form action="{% url 'submit' %}" method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
                             <ul class="list-unstyled mb-4">
                                                                     <li style="font-family: Montserrat, sans-serif; color: black;" > + 14 Odds</li>
-                                                                <li style="font-family: Montserrat, sans-serif; color: black;"> Upto {{ group.number }} Games</li>
+                                                                <li style="font-family: Montserrat, sans-serif; color: black;"> Upto {{ x.number }} Games</li>
                             </ul>
-                                <input type="hidden" value="{{ customer.phone_number }}">
-                                <input type="hidden" value="{{ group.amount }}">
+                                <input type="hidden" value="{{ customers.phone_number }}">
+                                <input type="hidden" value="{{ x.amount }}">
                                 <button class="btn btn-outline-info mb-3" type="submit" style="font-family: Montserrat, sans-serif;" ">Get Now</button>
                             </form>
                         </div>
@@ -107,123 +107,6 @@
                                             <p> No Games Available</p>
                                         </div>
             {% endif  %}
-                            <div class="col">
-                    <div class="card card-pricing style_prevu_kit text-center px-3 mb-4">
-                        <span class="h6 w-60 mx-auto px-4 py-1 text-white shadow-sm" style="background-color: steelblue;font-size: 25px;font-family: 'Space Mono', monospace;">HT/FT Bets</span>
-                        <div class="bg-transparent card-header pt-4 border-0">
-                            <h3 class="h3 font-weight-normal text-info text-center mb-0" style="font-family: Montserrat, sans-serif;">Kshs 100</h3>
-                        </div>
-                        <div class="card-body pt-0">
-                            <ul class="list-unstyled mb-4">
-                                                                    <li style="font-family: Montserrat, sans-serif; color: black"> + 36 Odds</li>
-                                                                <li style="font-family: Montserrat, sans-serif; color: black;"> Upto 7 Games</li>
-                            </ul>
-
-                            <button class="btn btn-outline-info mb-3" type="button" style="font-family: Montserrat, sans-serif;" data-toggle="modal" data-target="#tips-modal2" data-whatever="HT/FT Bets,7,100" name="action" value="7">Get Now</button>
-                        </div>
-                    </div>
-                </div>
-                            <div class="col">
-                    <div class="card card-pricing style_prevu_kit text-center px-3 mb-4">
-                        <span class="h6 w-60 mx-auto px-4 py-1 text-white shadow-sm" style="background-color: steelblue;font-size: 25px;font-family: 'Space Mono', monospace;">Correct Scores</span>
-                        <div class="bg-transparent card-header pt-4 border-0">
-                            <h3 class="h3 font-weight-normal text-info text-center mb-0" style="font-family: Montserrat, sans-serif;">Kshs 200</h3>
-                        </div>
-                        <div class="card-body pt-0">
-                            <ul class="list-unstyled mb-4">
-                                                                    <li style="font-family: Montserrat, sans-serif;color: black;"> + 190 Odds</li>
-                                                                <li style="font-family: Montserrat, sans-serif; color: black;"> Upto 4 Games</li>
-                            </ul>
-
-
-                            <button class="btn btn-outline-info mb-3" type="button" style="font-family: Montserrat, sans-serif;" data-toggle="modal" data-target="#tips-modal3" data-whatever="Correct Scores,4,200" name="action" value="4">Get Now</button>
-
-                        </div>
-                    </div>
-                </div>
-                            <div class="col">
-                    <div class="card card-pricing style_prevu_kit text-center px-3 mb-4">
-                        <span class="h6 w-60 mx-auto px-4 py-1 text-white shadow-sm" style="background-color: steelblue;font-size: 25px;font-family: 'Space Mono', monospace;">Weekly Bets</span>
-                        <div class="bg-transparent card-header pt-4 border-0">
-                            <h3 class="h3 font-weight-normal text-info text-center mb-0" style="font-family: Montserrat, sans-serif;">Kshs 150</h3>
-                        </div>
-                        <div class="card-body pt-0">
-                            <ul class="list-unstyled mb-4">
-                                                                    <li style="font-family: Montserrat, sans-serif; color: black;"> + 225 Odds</li>
-                                                                <li style="font-family: Montserrat, sans-serif; color: black;"> Upto 56 Games</li>
-                            </ul>
-
-                            <button class="btn btn-outline-info mb-3" type="submit" style="font-family: Montserrat, sans-serif;" data-toggle="modal" data-target="#tips-modal4" data-whatever="Weekly Bets,56,150" name="action" value="56">Get Now</button>
-
-                        </div>
-                    </div>
-                </div>
-                            <div class="col">
-                    <div class="card card-pricing style_prevu_kit text-center px-3 mb-4">
-                        <span class="h6 w-60 mx-auto px-4 py-1 text-white shadow-sm" style="background-color: steelblue;font-size: 25px;font-family: 'Space Mono', monospace;">Sportpesa Midweek Jackpot</span>
-                        <div class="bg-transparent card-header pt-4 border-0">
-                            <h3 class="h3 font-weight-normal text-info text-center mb-0" style="font-family: Montserrat, sans-serif;">Kshs 100</h3>
-                        </div>
-                        <div class="card-body pt-0">
-                            <ul class="list-unstyled mb-4">
-                                                                    <li></li>
-                                                                <li style="font-family: Montserrat, sans-serif; color: black;"> Upto 13 Games</li>
-                            </ul>
-
-                            <button class="btn btn-outline-info mb-3" type="button" style="font-family: Montserrat, sans-serif;" data-toggle="modal" data-target="#tips-modal5" data-whatever="Sportpesa Midweek Jackpot,13,100" name="action" value="13">Get Now</button>
-                        </div>
-                    </div>
-                </div>
-                            <div class="col">
-                    <div class="card card-pricing style_prevu_kit text-center px-3 mb-4">
-                        <span class="h6 w-60 mx-auto px-4 py-1 text-white shadow-sm" style="background-color: steelblue;font-size: 25px;font-family: 'Space Mono', monospace;">Sportpesa Mega Jackpot</span>
-                        <div class="bg-transparent card-header pt-4 border-0">
-                            <h3 class="h3 font-weight-normal text-info text-center mb-0" style="font-family: Montserrat, sans-serif;">Kshs 100</h3>
-                        </div>
-                        <div class="card-body pt-0">
-                            <ul class="list-unstyled mb-4">
-                                                                    <li></li>
-                                                                <li style="font-family: Montserrat, sans-serif; color: black"> Upto 13 Games</li>
-                            </ul>
-
-                            <button class="btn btn-outline-info mb-3" type="button" style="font-family: Montserrat, sans-serif;" data-toggle="modal" data-target="#tips-modal6" data-whatever="Sportpesa Mega Jackpot,13,100"  name="action" value="13">Get Now</button>
-
-                        </div>
-                    </div>
-                </div>
-                            <div class="col">
-                    <div class="card card-pricing style_prevu_kit text-center px-3 mb-4">
-                        <span class="h6 w-60 mx-auto px-4 py-1 text-white shadow-sm" style="background-color: steelblue;font-size: 25px;font-family: 'Space Mono', monospace;">Betika Midweek Jackpot</span>
-                        <div class="bg-transparent card-header pt-4 border-0">
-                            <h3 class="h3 font-weight-normal text-info text-center mb-0" style="font-family: Montserrat, sans-serif;">Kshs 100</h3>
-                        </div>
-                        <div class="card-body pt-0">
-                            <ul class="list-unstyled mb-4">
-                                                                    <li></li>
-                                                                <li style="font-family: Montserrat, sans-serif; color: black"> Upto 15 Games</li>
-                            </ul>
-
-                            <button class="btn btn-outline-info mb-3" type="button" style="font-family: Montserrat, sans-serif;" data-toggle="modal" data-target="#tips-modal7" data-whatever="Betika Midweek Jackpot,15,100" name="action" value="15">Get Now</button>
-
-                        </div>
-                    </div>
-                </div>
-                            <div class="col">
-                    <div class="card card-pricing style_prevu_kit text-center px-3 mb-4">
-                        <span class="h6 w-60 mx-auto px-4 py-1 text-white shadow-sm" style="background-color:steelblue;font-size: 25px;font-family: 'Space Mono', monospace;">Betika Mega Jackpot</span>
-                        <div class="bg-transparent card-header pt-4 border-0">
-                            <h3 class="h3 font-weight-normal text-info text-center mb-0" style="font-family: Montserrat, sans-serif;">Kshs 100</h3>
-                        </div>
-                        <div class="card-body pt-0">
-                            <ul class="list-unstyled mb-4">
-                                                                    <li></li>
-                                                                <li style="font-family: Montserrat, sans-serif; color: black"> Upto 17 Games</li>
-                            </ul>
-
-                            <button class="btn btn-outline-info mb-3" type="button" style="font-family: Montserrat, sans-serif;" data-toggle="modal" data-target="#tips-modal8" data-whatever="Betika Mega Jackpot,17,100" name="action" value="17">Get Now</button>
-                        </div>
-                    </div>
-                </div>
 
         </div>
     </div>
