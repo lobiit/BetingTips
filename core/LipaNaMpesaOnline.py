@@ -82,7 +82,7 @@ def sendSTK(phone_number, amount, orderId=0, transaction_id=None, shortcode=None
         "PartyB": code,
         "PhoneNumber": phone_number,
         # "CallBackURL": "https://sandbox.safaricom.co.ke/mpesa/",
-        "CallBackURL": "{}/payments/confirm/".format(HOST_NAME),
+        "CallBackURL": "{}/confirm/".format(HOST_NAME),
         "AccountReference": account_number or code,
         "TransactionDesc": "{}".format(phone_number)
     }
@@ -126,7 +126,7 @@ def check_payment_status(checkout_request_id, shortcode=None):
     s = code + PASS_KEY + time_now
     encoded = b64encode(s.encode('utf-8')).decode('utf-8')
 
-    api_url = "{}/mpesa/stkpushquery/v1/query".format(SAFARICOM_API)
+    api_url = "{}/stkpushquery/v1/query".format(SAFARICOM_API)
     headers = {
         "Authorization": "Bearer %s" % access_token,
         "Content-Type": "application/json",

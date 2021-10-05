@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -9,7 +10,7 @@ import africastalking
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-from __future__ import unicode_literals
+
 from django.contrib.auth.decorators import login_required
 import json
 from core.views import  *
@@ -125,12 +126,13 @@ def profile_page(request):
 
     context = {
         'games': games,
+        'customer': customer.objects.all()
     }
     return render(request, 'profile.html', context)
 
 
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+
 from django.contrib.auth.decorators import login_required
 import json
 from core.views import  *

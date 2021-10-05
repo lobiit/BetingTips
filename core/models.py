@@ -21,6 +21,8 @@ class customer(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
+    # membership = models.CharField(max_length=100, null=True)
+    # id = models.AutoField(primary_key=True)
 
     USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = ['email']
@@ -63,7 +65,6 @@ class BaseModel(models.Model):
 
 class PaymentTransaction(models.Model):
     customer = models.ForeignKey(customer, on_delete=models.CASCADE, null=True)
-
     phone_number = models.CharField(max_length=30)
     amount = models.DecimalField(('amount'), max_digits=6, decimal_places=2, default=0)
     isFinished = models.BooleanField(default=False)

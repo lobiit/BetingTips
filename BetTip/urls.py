@@ -19,7 +19,7 @@ from core import views
 from django.contrib.auth import views as auth_views
 from core.views import SubmitView, CheckTransaction, ConfirmView, CheckTransactionOnline
 from django.views.generic import TemplateView
-from mpesa.urls import mpesa_urls
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),

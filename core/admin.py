@@ -4,7 +4,6 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import *
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import PaymentTransaction, Wallet
 
 
 # Register your models here.
