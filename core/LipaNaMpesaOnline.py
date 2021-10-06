@@ -70,7 +70,7 @@ def sendSTK(phone_number, amount, orderId=0, transaction_id=None, shortcode=None
     if account_number:
         transaction_type = "CustomerPayBillOnline"
     print("==========================================>")
-    print(amount);
+    print(amount)
 
     request = {
         "BusinessShortCode": code,
@@ -147,6 +147,10 @@ def check_payment_status(checkout_request_id, shortcode=None):
             transaction.isFinished = True
             transaction.isSuccessFull = True
             transaction.save()
+            return redirect(reverse('profile'))
+
+        else:
+            return redirect(reverse('/'))
 
         result_code = json_response['ResultCode']
         response_message = json_response['ResultDesc']
@@ -155,6 +159,6 @@ def check_payment_status(checkout_request_id, shortcode=None):
             "status": result_code == "0",
             "message": response_message
         }
-        return redirect(reverse('profile'))
+
     else:
         raise Exception("Error sending MPesa stk push", json_response)

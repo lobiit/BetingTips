@@ -29,7 +29,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.conf import settings
-
+import datetime
 from core.models import *
 
 
@@ -127,11 +127,16 @@ def sign_up(request):
 @login_required(login_url="/sign-in/")
 def profile_page(request):
     games = Game.objects.filter(is_over=False)
-
+    transaction = PaymentTransaction.objects.filter(isSuccessFull=True)
+    #subcsription_time = datetime.datetime.now(timezone.utc) - transaction.timedelta(days=7)
     context = {
         'games': games,
         'customer': customer.objects.all()
     }
+    #if (transaction.seconds//60)%60 < 120:
+    #    return render(request, 'profile.html', context)
+    #else:
+    #     return render(request, 'index.html', context)
     return render(request, 'profile.html', context)
 
 
