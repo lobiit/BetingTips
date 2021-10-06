@@ -30,6 +30,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.conf import settings
 import datetime
+import phonenumbers
 from core.models import *
 
 
@@ -70,6 +71,7 @@ def sign_up(request):
             user = form.save(commit=False)
 
             user.save()
+
 
             # login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('/')
@@ -156,7 +158,7 @@ from rest_framework.response import Response
 from .models import PaymentTransaction
 from django.http import JsonResponse
 from rest_framework.permissions import AllowAny
-
+import phonenumbers
 
 # Create your views here.
 

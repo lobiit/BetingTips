@@ -48,7 +48,7 @@ def get_token():
         return False
 
 
-def sendSTK(phone_number, amount, orderId=0, transaction_id=None, shortcode=None, account_number=None):
+def sendSTK(phone_number, amount, orderId=0, transaction_id=None, shortcode=None, account_number=None, ):
     code = shortcode or SHORT_CODE
     access_token = get_token()
     if access_token is False:
@@ -113,9 +113,12 @@ def sendSTK(phone_number, amount, orderId=0, transaction_id=None, shortcode=None
                 # return render(request, 'profile.html')
                 # return redirect(reverse('profile') )
     else:
+
+        # messages.error(request, "Error sending Mpesa stk push Invalid phone number")
         raise Exception("Error sending MPesa stk push", json_response)
 
-    #return redirect(reverse('profile'))
+
+# return redirect(reverse('profile'))
 
 
 def check_payment_status(checkout_request_id, shortcode=None):
