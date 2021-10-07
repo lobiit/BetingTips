@@ -146,7 +146,7 @@ from django.conf import settings
 MPESA_CONFIG = {
     'CONSUMER_KEY': 'tMlHY1XtKWID53XZJ6JmbiIiTCa9YGDQ',
     'CONSUMER_SECRET': '2fYks6aAFghwSbOI',
-    'HOST_NAME': 'https://cf51-105-161-165-133.ngrok.io',
+    'HOST_NAME': 'https://9c72-197-237-73-12.ngrok.io/',
     'PASS_KEY': 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919',
     'SAFARICOM_API': 'https://sandbox.safaricom.co.ke',
     'SHORT_CODE': '174379'
