@@ -1,6 +1,5 @@
-{% load bootstrap4 %}
-{% load static %}
 
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,6 +17,10 @@
     <link type="text/css"rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link type="text/css" rel="stylesheet"  href="{% static 'css/sidebar-1.css' %}">
     <link  type="text/css" rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
     <script src="https://use.fontawesome.com/00d23fb2c6.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LQL3GSXXEM"></script>
@@ -28,8 +31,7 @@
 
     gtag('config', 'G-LQL3GSXXEM');
     </script>
-    <style>
-    </style>
+    {% block head %}{% endblock %}
 </head>
 
 
@@ -74,12 +76,12 @@
 
         <div class="container" style="margin-top:-10px;">
             <h1 class="text-uppercase past-tips-title w3-large w3-text-white" style="padding-top:30px;text-align:right;">MOBILE NUMBER:{{ user.phone_number }}</h1>
-
-            <h2 class="text-white w3-large w3-margin-top" style="font-family: 'Space Mono', monospace;">Your Weekly Sure Bets [ From <span class="w3-text-red">{{ user.date_joined }}</span> To <span class="w3-text-red"> 2021-10-05</span> ]</h2>
+ {% if games %}
+            <h2 class="text-white w3-large w3-margin-top" style="font-family: 'Space Mono', monospace;">Your Weekly Sure Bets [ From <span class="w3-text-red">{{ user.PaymentTrnsaction.date_modified }}</span> To <span class="w3-text-red"> </span> ]</h2>
 
 
             <div class="past-tips py-1 shadow-lg" style="background-color: #FFFFFF">
-            <h2 class="text-white h4 w3-center" style="font-family: 'Space Mono', monospace;">Wednesday 29 September, 2021</h2>
+            <h2 class="text-white h4 w3-center" style="font-family: 'Space Mono', monospace;">Thursday 7 October, 2021</h2>
             <p class="w3-white w3-large px-3" style="font-family: 'Space Mono', monospace;">Please Separate Slips!</p>
                 <div class="col-md-12 search-table-col">
                     <!-- <h3 class="text-white" style="font-family: Montserrat, sans-serif;">VIP Tips<span class="float-right text-danger total-odds">Total Odds: 357.98</span></h3> -->
@@ -90,7 +92,7 @@
                             <thead class="bill-header cs">
                             <tr><h5 style="font-family:Montserrat, sans-serif; color: black">Bet Slip #1</h5></tr>
                                 <tr>
-                                    <th id="trs-hd">&nbsp;No.</th>
+                                    <!--<th id="trs-hd">&nbsp;No.</th>-->
                                     <th id="trs-hd">Game Id</th>
                                     <th id="trs-hd">Teams</th>
                                     <th id="trs-hd">Tip</th>
@@ -101,12 +103,11 @@
                                     <th id="trs-hd">Won</th> -->
                                 </tr>
                             </thead>
-                                 {% if games %}
+
                                         {% for game in games %}
                                 <tr style="color: black">
 
-                                <td>
-                                    {{ game.number }}</td>
+                                <!--<td>{{ game.number }}</td>-->
                                     <td>{{ game.game_id }}</td>
                                     <td>{{ game.home_team }}- {{ game.away_team }}</td>
                                     <td>{{ game.tip }}</td>
@@ -117,11 +118,7 @@
 
                                 </tr>
                                       {% endfor %}
-                                        {% else %}
-                                        <div class="col-md-12">
-                                            <p> No Games Available</p>
-                                        </div>
-                                {% endif %}
+
                             </tbody>
 
 
@@ -136,13 +133,18 @@
                     </div>
                                     </div>
             </div>
-                         <p><span class="float-left mt-3 text-danger w3-medium">Subscription Ends on: 2021-10-05</span></p>
+                         <p><span class="float-left mt-3 text-danger w3-medium">Subscription Ends on: {{ game.date }}</span></p>
+                                                {% else %}
+                                        <div class="col-md-12">
+                                            <p style="color:white"> No Games Available: Ensure you paid the specified amount and wait for 1-5 minutes and refresh this page</p>
+                                        </div>
+                                {% endif %}
         </div>
     </section>
     <div class="row" style="background-color:#fff;">
         <div class="col">
             <div class="text-center" style="padding:20px;background-color:rgba(0,0,0,0.9);color:#fff;font-size:8px;">
-                <h3 class="text-center" style="margin-top: 20px;font-size: 14px;font-family: Montserrat, sans-serif;">Copyright&nbsp; <i class="fa fa-copyright"></i>&nbsp;2020. All Rights Reserved.</h3>
+                <h3 class="text-center" style="margin-top: 20px;font-size: 14px;font-family: Montserrat, sans-serif;">Copyright&nbsp; <i class="fa fa-copyright"></i>&nbsp;2021. All Rights Reserved.</h3>
             </div>
         </div>
     </div>
@@ -151,6 +153,26 @@
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/fix-navbar.js' %}"> </script>
+     <script src="https://unpkg.com/bootoast@1.0.1/dist/bootoast.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/bootoast@1.0.1/dist/bootoast.min.css">
+
+  <script>
+    function toast(message, type) {
+      bootoast.toast({
+        position: 'leftBottom',
+        message,
+        type,
+      });
+    }
+
+    {% if messages %}
+
+    {% for message in messages %}
+    toast('{{ message }}', '{{ message.tags }}');
+    {% endfor %}
+
+    {% endif %}
+  </script>
     <script>
          $('.modal').on('show.bs.modal', function () {
         if ($(document).height() > $(window).height()) {

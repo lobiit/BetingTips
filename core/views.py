@@ -47,6 +47,9 @@ def home(request):
     }
     return render(request, 'index.html', context)
 
+@login_required(login_url="/sign-in/")
+def check(request):
+    return render(request, 'CheckTransaction.html')
 
 def sign_in(request):
     username = request.POST['phone_number']
@@ -128,18 +131,28 @@ def sign_up(request):
 
 @login_required(login_url="/sign-in/")
 def profile_page(request):
-    games = Game.objects.filter(is_over=False)
-    transaction = PaymentTransaction.objects.filter(isSuccessFull=True)
-    #subcsription_time = datetime.datetime.now(timezone.utc) - transaction.timedelta(days=7)
-    context = {
-        'games': games,
-        'customer': customer.objects.all()
-    }
+    if request.method=='POST':
+        current_customer = request.user
+        transaction = PaymentTransaction.objects.filter(customer=current_customer).last()
+        check = request.POST['transaction_id']
+        games = Game.objects.filter(is_over=False)
+
+        context = {
+                'games': games,
+                'customer': customer.objects.all()
+            }
+
+        if PaymentTransaction.objects.filter(trans_id=check).exists():
+            transaction.customer = current_customer
+            transaction.save()
+            return render(request, 'profile.html', context)
+        else:
+            messages.error(request,"Ensure you entered the correct request Transaction id")
+            return redirect(reverse('check'))
     #if (transaction.seconds//60)%60 < 120:
     #    return render(request, 'profile.html', context)
     #else:
     #     return render(request, 'index.html', context)
-    return render(request, 'profile.html', context)
 
 
 # -*- coding: utf-8 -*-
@@ -168,6 +181,7 @@ class PaymentTranactionView(ListCreateAPIView):
         return HttpResponse("OK", status=200)
 
 
+# @login_required(login_url="/sign-in/")
 class SubmitView(APIView):
     permission_classes = [AllowAny, ]
 
@@ -187,10 +201,11 @@ class SubmitView(APIView):
         transaction_id = sendSTK(phone_number, amount, entity_id, account_number=paybill_account_number)
         # b2c()
         message = {"status": "ok", "transaction_id": transaction_id}
-        return redirect(reverse('profile') )
+        return redirect(reverse('check') )
         # return Response(message, status=HTTP_200_OK)
 
 
+# @login_required(login_url="/sign-in/")
 class CheckTransactionOnline(APIView):
     permission_classes = [AllowAny, ]
 
@@ -201,8 +216,8 @@ class CheckTransactionOnline(APIView):
             if transaction.checkoutRequestID:
                 status_response = check_payment_status(transaction.checkoutRequestID)
                #return JsonResponse(
-               #    status_response, status=200)
-                # return redirect(reverse('profile') )
+                  # "status_response", "status"=200)
+                    # return redirect(reverse('profile') )
             else:
                 return JsonResponse({
                     "message": "Server Error. Transaction not found",
@@ -216,6 +231,7 @@ class CheckTransactionOnline(APIView):
                 status=400)
 
 
+# @login_required(login_url="/sign-in/")
 class CheckTransaction(APIView):
     permission_classes = [AllowAny, ]
 
@@ -246,6 +262,7 @@ class CheckTransaction(APIView):
                 status=400)
 
 
+# @login_required(login_url="/sign-in/")
 class RetryTransaction(APIView):
     permission_classes = [AllowAny, ]
 
@@ -318,6 +335,7 @@ class ConfirmView(APIView):
                 transaction.isFinished = True
                 transaction.isSuccessFull = True
                 transaction.save()
+                return redirect(reverse('profile') )
 
             else:
 
@@ -331,12 +349,14 @@ class ConfirmView(APIView):
             try:
               transaction = PaymentTransaction.objects.get(
                 checkoutRequestID=requestId)
+
             except:
                    return Response(message, status=HTTP_200_OK)
             if transaction:
                 transaction.isFinished = True
                 transaction.isSuccessFull = False
                 transaction.save()
+                return redirect(reverse('profile') )
 
         # Prepare the response, assuming no errors have occurred. Any response
         # other than a 0 (zero) for the 'ResultCode' during Validation only means
@@ -344,9 +364,11 @@ class ConfirmView(APIView):
 
 
         # Send the response back to the server
-        return Response(message, status=HTTP_200_OK)
+        return redirect(reverse('profile') )
+        # return Response(message, status=HTTP_200_OK)
 
     def get(self, request):
+        # return redirect(reverse('check') )
         return Response("Confirm callback", status=HTTP_200_OK)
 
 

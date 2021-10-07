@@ -43,6 +43,7 @@ class customer(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
+
     # membership = models.ForeignKey(Membership, related_name='user_membership', on_delete=models.SET_NULL, null=True)
     # membership = models.CharField(max_length=100, null=True)
     # id = models.AutoField(primary_key=True)

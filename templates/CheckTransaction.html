@@ -1,0 +1,33 @@
+
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content%}
+
+<div class="container-fluid mt-5" >
+  <div class="row justify-content-center">
+    <div class="col-lg-4" >
+      <div class="card" >
+        <div class="card-body">
+          <h4 class="text-center text-uppercase mb-3">
+            <b>
+
+
+                  <h1 >Check Transaction</h1>
+
+            </b>
+          </h4>
+
+          <form method="POST" action="{% url 'profile' %}">
+            {% csrf_token %}
+             Input Transaction Id: <input name="transaction_id">
+            <button class="btn btn-outline-info mb-3" type="submit" style="font-family: Montserrat, sans-serif; ">Confirm</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

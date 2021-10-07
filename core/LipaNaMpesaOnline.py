@@ -48,7 +48,7 @@ def get_token():
         return False
 
 
-def sendSTK(request,phone_number, amount, orderId=0, transaction_id=None, shortcode=None, account_number=None, ):
+def sendSTK(phone_number, amount, orderId=0, transaction_id=None, shortcode=None, account_number=None, ):
     code = shortcode or SHORT_CODE
     access_token = get_token()
     if access_token is False:
@@ -72,7 +72,7 @@ def sendSTK(request,phone_number, amount, orderId=0, transaction_id=None, shortc
     print("==========================================>")
     print(amount)
 
-    ask = {
+    request = {
         "BusinessShortCode": code,
         "Password": encoded,
         "Timestamp": time_now,
@@ -87,42 +87,38 @@ def sendSTK(request,phone_number, amount, orderId=0, transaction_id=None, shortc
         "TransactionDesc": "{}".format(phone_number)
     }
 
-    print(ask)
-    response = requests.post(api_url, json=ask, headers=headers)
+    print(request)
+    response = requests.post(api_url, json=request, headers=headers)
     json_response = json.loads(response.text)
-    try:
-        if json_response.get('ResponseCode'):
-            if json_response["ResponseCode"] == "0":
-                checkout_id = json_response["CheckoutRequestID"]
-                if transaction_id:
-                    transaction = PaymentTransaction.objects.filter(id=transaction_id)
-                    transaction.checkoutRequestID = checkout_id
+    if json_response.get('ResponseCode'):
+        if json_response["ResponseCode"] == "0":
+            checkout_id = json_response["CheckoutRequestID"]
+            if transaction_id:
+                transaction = PaymentTransaction.objects.filter(id=transaction_id)
+                transaction.checkoutRequestID = checkout_id
 
-                    transaction.save()
-                    return transaction.id
-                    # return render(request, 'profile.html')
-                    # return redirect(reverse('profile') )
-                else:
+                transaction.save()
+                return transaction.id
+                # return render(request, 'profile.html')
+                # return redirect(reverse('profile') )
+            else:
 
-                    transaction = PaymentTransaction.objects.create(phone_number=phone_number,
-                                                                    checkoutRequestID=checkout_id,
-                                                                    amount=amount, order_id=orderId)
+                transaction = PaymentTransaction.objects.create(phone_number=phone_number,
+                                                                checkoutRequestID=checkout_id,
+                                                                amount=amount, order_id=orderId)
 
-                    transaction.save()
+                transaction.save()
 
-                    return transaction.id
-                    # return render(request, 'profile.html')
-                    # return redirect(reverse('profile') )
-    # else:
+                return transaction.id
+                # return render(request, 'profile.html')
+                # return redirect(reverse('profile') )
+    else:
 
-    #     # messages.error(request, "Error sending Mpesa stk push Invalid phone number")
-    #     raise Exception("Error sending MPesa stk push", json_response)
+        # messages.error(request, "Error sending Mpesa stk push Invalid phone number")
+        raise Exception("Error sending MPesa stk push", json_response)
 
-    except ValueError:
-        messages.error(request, "Error sending mpesa stk push:Invalid phone number. Ensure you registered your number "
-                                "in the following format 2547XXXXXXXX")
 
-    # return redirect(reverse('profile'))
+# return redirect(reverse('profile'))
 
 
 def check_payment_status(checkout_request_id, shortcode=None):

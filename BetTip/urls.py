@@ -27,6 +27,7 @@ urlpatterns = [
     path('sign-in/', auth_views.LoginView.as_view(template_name="sign_in.html")),
     path('sign-out/', auth_views.LogoutView.as_view(next_page="/")),
     path('sign-up/', views.sign_up),
+    path('check/', views.check, name="check"),
     path('accounts/profile/', views.profile_page, name="profile"),
     # path('payments/', include(mpesa_urls)),
     path('submit/', SubmitView.as_view(), name='submit'),
