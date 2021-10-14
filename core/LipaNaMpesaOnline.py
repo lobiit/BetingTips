@@ -115,7 +115,8 @@ def sendSTK(phone_number, amount, orderId=0, transaction_id=None, shortcode=None
     else:
 
         # messages.error(request, "Error sending Mpesa stk push Invalid phone number")
-        raise Exception("Error sending MPesa stk push", json_response)
+        messages.error(requests, "Ensure you registered your phone number in this format: 2547XXXXXXXX")
+        # raise Exception("Error sending MPesa stk push", json_response)
 
 
 # return redirect(reverse('profile'))
@@ -149,8 +150,9 @@ def check_payment_status(checkout_request_id, shortcode=None):
         if transaction:
             transaction.isFinished = True
             transaction.isSuccessFull = True
+            transaction.customer = profile_page.current_customer
             transaction.save()
-            return redirect(reverse('profile'))
+            # return redirect(reverse('profile'))
 
         else:
             return redirect(reverse('/'))
@@ -164,4 +166,5 @@ def check_payment_status(checkout_request_id, shortcode=None):
         }
 
     else:
-        raise Exception("Error sending MPesa stk push", json_response)
+        messages.error(requests, "Ensure you registered your phone number in this format: 2547XXXXXXXX")
+        # raise Exception("Error sending MPesa stk push", json_response)
