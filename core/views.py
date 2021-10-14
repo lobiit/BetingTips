@@ -152,6 +152,7 @@ class SubmitView(APIView):
 
     def post(self, request):
         customer = request.user
+        # group = home.group
         data = request.data
         phone_number = data.get('phone_number')
         amount = data.get('amount')
@@ -165,7 +166,7 @@ class SubmitView(APIView):
             paybill_account_number = data.get('paybill_account_number')
 
         transaction_id = sendSTK(customer,phone_number, amount, entity_id, account_number=paybill_account_number)
-        customer = profile_page(customer)
+
         # b2c()
         message = {"status": "ok", "transaction_id": transaction_id}
         return redirect(reverse('check') )

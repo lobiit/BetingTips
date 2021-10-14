@@ -109,6 +109,7 @@ class PaymentTransaction(models.Model):
     checkoutRequestID = models.CharField(max_length=100)
     date_modified = models.DateTimeField(auto_now=True)
     date_created = models.DateTimeField(auto_now=False, auto_now_add=True)
+    group = models.ForeignKey(Group, on_delete=models.DO_NOTHING, null=True)
 
     def __str__(self):
 

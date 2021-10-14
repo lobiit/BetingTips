@@ -79,6 +79,7 @@
     <div class="container mb-5 mt-5">
         <div class="row card-deck flex-column flex-md-row mb-3">
             {% if group %}
+
             {% for x in group %}
             <div class="col">
                     <div class="card card-pricing style_prevu_kit text-center px-3 mb-4">
@@ -96,6 +97,7 @@
                                 {% if request.user.is_authenticated  %}
                                 <input type="hidden" value="{{ user.phone_number }}" name="phone_number">
                                 {% endif %}
+
                                 <input type="hidden" value="{{ x.amount }}" name="amount">
                                 <button class="btn btn-outline-info mb-3" type="submit" style="font-family: Montserrat, sans-serif; ">Get Now</button>
                             </form>
@@ -114,12 +116,12 @@
         </div>
     </div>
 
-
+ {% if games %}
     <div class="container home-past">
         <h2 class="text-uppercase past-tips-title" style="color: black">Past Winning Tips</h2>
-
+         {% for game in games %}
                     <div class="past-tips px-3 py-3 shadow-lg" style="background-color: steelblue">
-                <h2 class="text-white w3-xlarge" style="font-family: 'Space Mono', monospace; color: black">Monday 27 September, 2021</h2>
+                <h2 class="text-white w3-xlarge" style="font-family: 'Space Mono', monospace; color: black">{{ game.date.date }}</h2>
                 <div class="col-md-12 search-table-col">
                     <!-- <h3 class="text-white" style="font-family: Montserrat, sans-serif;">VIP Tips<span class="float-right text-danger total-odds">Total Odds: 357.98</span></h3> -->
                     <div class="table-responsive table table-hover table-borderless results" >
@@ -137,8 +139,8 @@
                                     </tr>
                                 </thead>
                                     <tbody>
-                                    {% if games %}
-                                            {% for game in games %}
+
+
                                         <tr style="color: black">
 
                                             <!--<td>{{ game.number }}</td>-->
@@ -152,6 +154,10 @@
 
                                         </tr>
                                             {% endfor %}
+                                                     {% else %}
+                                        <div class="col-md-12" style="background: greenyellow">
+                                            <p> No past games Available</p>
+                                        </div>
                                     {% endif %}
                                     </tbody>
 
