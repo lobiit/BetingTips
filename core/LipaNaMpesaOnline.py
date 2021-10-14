@@ -48,7 +48,8 @@ def get_token():
         return False
 
 
-def sendSTK(phone_number, amount, orderId=0, transaction_id=None, shortcode=None, account_number=None, ):
+def sendSTK(customer, phone_number, amount, orderId=0, transaction_id=None, shortcode=None, account_number=None, ):
+    # current_customer = request.user
     code = shortcode or SHORT_CODE
     access_token = get_token()
     if access_token is False:
@@ -70,6 +71,7 @@ def sendSTK(phone_number, amount, orderId=0, transaction_id=None, shortcode=None
     if account_number:
         transaction_type = "CustomerPayBillOnline"
     print("==========================================>")
+    print(customer)
     print(amount)
 
     request = {
@@ -105,7 +107,8 @@ def sendSTK(phone_number, amount, orderId=0, transaction_id=None, shortcode=None
 
                 transaction = PaymentTransaction.objects.create(phone_number=phone_number,
                                                                 checkoutRequestID=checkout_id,
-                                                                amount=amount, order_id=orderId)
+                                                                amount=amount, order_id=orderId, customer=customer
+                                                                )
 
                 transaction.save()
 
@@ -115,8 +118,8 @@ def sendSTK(phone_number, amount, orderId=0, transaction_id=None, shortcode=None
     else:
 
         # messages.error(request, "Error sending Mpesa stk push Invalid phone number")
-        messages.error(requests, "Ensure you registered your phone number in this format: 2547XXXXXXXX")
-        # raise Exception("Error sending MPesa stk push", json_response)
+        # messages.error(requests, "Ensure you registered your phone number in this format: 2547XXXXXXXX")
+        raise Exception("Error sending MPesa stk push,  You entered an invalid phone number", json_response)
 
 
 # return redirect(reverse('profile'))
@@ -166,5 +169,6 @@ def check_payment_status(checkout_request_id, shortcode=None):
         }
 
     else:
-        messages.error(requests, "Ensure you registered your phone number in this format: 2547XXXXXXXX")
-        # raise Exception("Error sending MPesa stk push", json_response)
+        return redirect(reverse('/'))
+        # messages.error(requests, "Ensure you registered your phone number in this format: 2547XXXXXXXX")
+        # raise Exception("Error sending MPesa stk push, You entered an invalid phone number", json_response)

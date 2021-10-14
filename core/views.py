@@ -89,6 +89,8 @@ def profile_page(request):
     if request.method=='POST':
         current_customer = request.user
         transaction = PaymentTransaction.objects.filter(customer=current_customer).last()
+        # transaction.customer = current_customer
+        # transaction.save()
         check = request.POST['transaction_id']
         games = Game.objects.filter(is_over=False)
 
@@ -97,15 +99,23 @@ def profile_page(request):
                 'customer': customer.objects.all()
             }
 
-        if PaymentTransaction.objects.filter(trans_id=check).exists():
-            transaction.customer = current_customer
-            transaction.save()
-            return render(request, 'profile.html', context)
+        if check in transaction.trans_id:
+
+                # transaction.customer = current_customer
+                # transaction.save()
+                return render(request, 'profile.html', context)
+            #except ValueError:
+            #    messages.error(request, "Invalid transaction id")
+            #    return redirect(reverse('check'))
+            #except Exception as e:
+            #    print(e)
+            #    messages.error(request, "Invalid transaction id")
+            #    return redirect(reverse('check'))
         else:
             messages.error(request,"Ensure you entered the correct Transaction id")
             return redirect(reverse('check'))
     #if (transaction.seconds//60)%60 < 120:
-    #    return render(request, 'profile.html', context)
+     # return render(request, 'profile.html', context)
     #else:
     #     return render(request, 'index.html', context)
 
@@ -141,6 +151,7 @@ class SubmitView(APIView):
     permission_classes = [AllowAny, ]
 
     def post(self, request):
+        customer = request.user
         data = request.data
         phone_number = data.get('phone_number')
         amount = data.get('amount')
@@ -153,7 +164,8 @@ class SubmitView(APIView):
         if data.get('paybill_account_number'):
             paybill_account_number = data.get('paybill_account_number')
 
-        transaction_id = sendSTK(phone_number, amount, entity_id, account_number=paybill_account_number)
+        transaction_id = sendSTK(customer,phone_number, amount, entity_id, account_number=paybill_account_number)
+        customer = profile_page(customer)
         # b2c()
         message = {"status": "ok", "transaction_id": transaction_id}
         return redirect(reverse('check') )
@@ -319,8 +331,8 @@ class ConfirmView(APIView):
 
 
         # Send the response back to the server
-        return redirect(reverse('profile') )
-        # return Response(message, status=HTTP_200_OK)
+        # return redirect(reverse('profile') )
+        return Response(message, status=HTTP_200_OK)
 
     def get(self, request):
         # return redirect(reverse('check') )
