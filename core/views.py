@@ -123,7 +123,6 @@ from django.http import JsonResponse
 from rest_framework.permissions import AllowAny
 
 
-
 # Create your views here.
 
 
