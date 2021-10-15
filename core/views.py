@@ -13,7 +13,7 @@ from django.urls import reverse
 
 from django.contrib.auth.decorators import login_required
 import json
-from core.views import  *
+from core.views import *
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import View
@@ -47,9 +47,11 @@ def home(request):
     }
     return render(request, 'index.html', context)
 
+
 @login_required(login_url="/sign-in/")
 def check(request):
     return render(request, 'CheckTransaction.html')
+
 
 def sign_in(request):
     username = request.POST['phone_number']
@@ -75,7 +77,6 @@ def sign_up(request):
 
             user.save()
 
-
             # login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('/')
 
@@ -86,45 +87,29 @@ def sign_up(request):
 
 @login_required(login_url="/sign-in/")
 def profile_page(request):
-    if request.method=='POST':
+    if request.method == 'POST':
         current_customer = request.user
         transaction = PaymentTransaction.objects.filter(customer=current_customer, is_deleted=False).last()
-        # transaction.customer = current_customer
-        # transaction.save()
+
         check = request.POST['transaction_id']
         games = Game.objects.filter(is_over=False)
 
         context = {
-                'games': games,
-                'customer': customer.objects.all()
-            }
+            'games': games,
+            'customer': customer.objects.all()
+        }
 
         if check in transaction.trans_id:
-
-                # transaction.customer = current_customer
-                # transaction.save()
-                return render(request, 'profile.html', context)
-            #except ValueError:
-            #    messages.error(request, "Invalid transaction id")
-            #    return redirect(reverse('check'))
-            #except Exception as e:
-            #    print(e)
-            #    messages.error(request, "Invalid transaction id")
-            #    return redirect(reverse('check'))
+            return render(request, 'profile.html', context)
         else:
-            messages.error(request,"Ensure you entered the correct Transaction id")
+            messages.error(request, "Ensure you entered the correct Transaction id")
             return redirect(reverse('check'))
-    #if (transaction.seconds//60)%60 < 120:
-     # return render(request, 'profile.html', context)
-    #else:
-    #     return render(request, 'index.html', context)
 
 
 # -*- coding: utf-8 -*-
 
-from django.contrib.auth.decorators import login_required
+
 import json
-from core.views import  *
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import View
@@ -136,7 +121,8 @@ from rest_framework.response import Response
 from .models import PaymentTransaction
 from django.http import JsonResponse
 from rest_framework.permissions import AllowAny
-import phonenumbers
+
+
 
 # Create your views here.
 
@@ -157,7 +143,7 @@ class SubmitView(APIView):
         phone_number = data.get('phone_number')
         amount = data.get('amount')
         print(data.get('group_id'))
-        group_id=int(data.get('group_id'))
+        group_id = int(data.get('group_id'))
 
         entity_id = 0
         if data.get('entity_id'):
@@ -167,11 +153,12 @@ class SubmitView(APIView):
         if data.get('paybill_account_number'):
             paybill_account_number = data.get('paybill_account_number')
 
-        transaction_id = sendSTK(customer, group_id, phone_number, amount, entity_id, account_number=paybill_account_number)
+        transaction_id = sendSTK(customer, group_id, phone_number, amount, entity_id,
+                                 account_number=paybill_account_number)
 
         # b2c()
         message = {"status": "ok", "transaction_id": transaction_id}
-        return redirect(reverse('check') )
+        return redirect(reverse('check'))
         # return Response(message, status=HTTP_200_OK)
 
 
@@ -185,9 +172,9 @@ class CheckTransactionOnline(APIView):
         try:
             if transaction.checkoutRequestID:
                 status_response = check_payment_status(transaction.checkoutRequestID)
-               #return JsonResponse(
-                  # "status_response", "status"=200)
-                    # return redirect(reverse('profile') )
+            # return JsonResponse(
+            # "status_response", "status"=200)
+            # return redirect(reverse('profile') )
             else:
                 return JsonResponse({
                     "message": "Server Error. Transaction not found",
@@ -283,7 +270,7 @@ class ConfirmView(APIView):
             "ResultDesc": "The service was accepted successfully",
             "ThirdPartyTransID": "1237867865"
         }
-        transaction=None
+        transaction = None
 
         # Perform your processing here e.g. print it out...
         if resultcode == 0:
@@ -294,11 +281,10 @@ class ConfirmView(APIView):
                 if data.get('Name') == "MpesaReceiptNumber":
                     receipt_number = data.get('Value')
             try:
-              transaction = PaymentTransaction.objects.get(
-                checkoutRequestID=requestId)
+                transaction = PaymentTransaction.objects.get(
+                    checkoutRequestID=requestId)
             except:
-                   return Response(message, status=HTTP_200_OK)
-
+                return Response(message, status=HTTP_200_OK)
 
             if transaction:
                 transaction.trans_id = receipt_number
@@ -309,7 +295,7 @@ class ConfirmView(APIView):
 
             else:
 
-             return Response(message, status=HTTP_200_OK)
+                return Response(message, status=HTTP_200_OK)
 
 
 
@@ -317,11 +303,11 @@ class ConfirmView(APIView):
             print('unsuccessfull')
             requestId = body.get('stkCallback').get('CheckoutRequestID')
             try:
-              transaction = PaymentTransaction.objects.get(
-                checkoutRequestID=requestId)
+                transaction = PaymentTransaction.objects.get(
+                    checkoutRequestID=requestId)
 
             except:
-                   return Response(message, status=HTTP_200_OK)
+                return Response(message, status=HTTP_200_OK)
             if transaction:
                 transaction.isFinished = True
                 transaction.isSuccessFull = False
@@ -331,7 +317,6 @@ class ConfirmView(APIView):
         # Prepare the response, assuming no errors have occurred. Any response
         # other than a 0 (zero) for the 'ResultCode' during Validation only means
         # an error occurred and the transaction is cancelled
-
 
         # Send the response back to the server
         # return redirect(reverse('profile') )
