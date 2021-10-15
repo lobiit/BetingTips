@@ -97,8 +97,9 @@
                                 {% if request.user.is_authenticated  %}
                                 <input type="hidden" value="{{ user.phone_number }}" name="phone_number">
                                 {% endif %}
-
                                 <input type="hidden" value="{{ x.amount }}" name="amount">
+                                <input type="hidden" name="group_id" value="{{ x.id }}">
+
                                 <button class="btn btn-outline-info mb-3" type="submit" style="font-family: Montserrat, sans-serif; ">Get Now</button>
                             </form>
                         </div>

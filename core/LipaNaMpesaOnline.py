@@ -48,7 +48,7 @@ def get_token():
         return False
 
 
-def sendSTK(customer, phone_number, amount, orderId=0, transaction_id=None, shortcode=None, account_number=None, ):
+def sendSTK(customer,group_id, phone_number, amount, orderId=0, transaction_id=None, shortcode=None, account_number=None):
     # current_customer = request.user
     code = shortcode or SHORT_CODE
     access_token = get_token()
@@ -72,6 +72,8 @@ def sendSTK(customer, phone_number, amount, orderId=0, transaction_id=None, shor
         transaction_type = "CustomerPayBillOnline"
     print("==========================================>")
     print(customer)
+
+    print(group_id)
     print(amount)
 
     request = {
@@ -83,7 +85,6 @@ def sendSTK(customer, phone_number, amount, orderId=0, transaction_id=None, shor
         "PartyA": phone_number,
         "PartyB": code,
         "PhoneNumber": phone_number,
-        # "CallBackURL": "https://sandbox.safaricom.co.ke/mpesa/",
         "CallBackURL": "{}/confirm/".format(HOST_NAME),
         "AccountReference": account_number or code,
         "TransactionDesc": "{}".format(phone_number)
@@ -107,7 +108,8 @@ def sendSTK(customer, phone_number, amount, orderId=0, transaction_id=None, shor
 
                 transaction = PaymentTransaction.objects.create(phone_number=phone_number,
                                                                 checkoutRequestID=checkout_id,
-                                                                amount=amount, order_id=orderId, customer=customer
+                                                                amount=amount, order_id=orderId, customer=customer,
+                                                                group_id=group_id
                                                                 )
 
                 transaction.save()

@@ -88,7 +88,7 @@ def sign_up(request):
 def profile_page(request):
     if request.method=='POST':
         current_customer = request.user
-        transaction = PaymentTransaction.objects.filter(customer=current_customer).last()
+        transaction = PaymentTransaction.objects.filter(customer=current_customer, is_deleted=False).last()
         # transaction.customer = current_customer
         # transaction.save()
         check = request.POST['transaction_id']
@@ -156,6 +156,8 @@ class SubmitView(APIView):
         data = request.data
         phone_number = data.get('phone_number')
         amount = data.get('amount')
+        print(data.get('group_id'))
+        group_id=int(data.get('group_id'))
 
         entity_id = 0
         if data.get('entity_id'):
@@ -165,7 +167,7 @@ class SubmitView(APIView):
         if data.get('paybill_account_number'):
             paybill_account_number = data.get('paybill_account_number')
 
-        transaction_id = sendSTK(customer,phone_number, amount, entity_id, account_number=paybill_account_number)
+        transaction_id = sendSTK(customer, group_id, phone_number, amount, entity_id, account_number=paybill_account_number)
 
         # b2c()
         message = {"status": "ok", "transaction_id": transaction_id}
@@ -303,7 +305,7 @@ class ConfirmView(APIView):
                 transaction.isFinished = True
                 transaction.isSuccessFull = True
                 transaction.save()
-                return redirect(reverse('profile') )
+                # return redirect(reverse('profile') )
 
             else:
 
@@ -324,7 +326,7 @@ class ConfirmView(APIView):
                 transaction.isFinished = True
                 transaction.isSuccessFull = False
                 transaction.save()
-                return redirect(reverse('profile') )
+                # return redirect(reverse('profile') )
 
         # Prepare the response, assuming no errors have occurred. Any response
         # other than a 0 (zero) for the 'ResultCode' during Validation only means
