@@ -53,17 +53,6 @@ def check(request):
     return render(request, 'CheckTransaction.html')
 
 
-def sign_in(request):
-    username = request.POST['phone_number']
-    password = request.POST['password']
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-        login(request, user)
-        # Redirect to a success page.
-        ...
-    else:
-        # Return an 'invalid login' error message.
-        ...
 
 
 def sign_up(request):
@@ -90,13 +79,14 @@ def profile_page(request):
     if request.method == 'POST':
         current_customer = request.user
         transaction = PaymentTransaction.objects.filter(customer=current_customer, is_deleted=False).last()
-
+        group = Group.objects.filter(is_published=True)
         check = request.POST['transaction_id']
         games = Game.objects.filter(is_over=False)
 
         context = {
             'transaction': transaction,
             'games': games,
+            'group': group,
             'customer': customer.objects.all()
         }
 

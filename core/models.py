@@ -63,6 +63,7 @@ class Group(models.Model):
     number = models.IntegerField()
     days = models.IntegerField(default=1)
     is_published = models.BooleanField(default=True)
+    odds = models.CharField(max_length=100, default=14)
 
     def __str__(self):
         return self.title
