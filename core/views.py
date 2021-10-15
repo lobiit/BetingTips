@@ -95,6 +95,7 @@ def profile_page(request):
         games = Game.objects.filter(is_over=False)
 
         context = {
+            'transaction': transaction,
             'games': games,
             'customer': customer.objects.all()
         }
