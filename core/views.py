@@ -53,8 +53,6 @@ def check(request):
     return render(request, 'CheckTransaction.html')
 
 
-
-
 def sign_up(request):
     form = forms.CustomUserCreationForm()
 
@@ -63,9 +61,7 @@ def sign_up(request):
 
         if form.is_valid():
             user = form.save(commit=False)
-
             user.save()
-
             # login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('/')
 
@@ -79,9 +75,9 @@ def profile_page(request):
     if request.method == 'POST':
         current_customer = request.user
         transaction = PaymentTransaction.objects.filter(customer=current_customer, is_deleted=False).last()
-        group = Group.objects.filter(is_published=True)
+        group = Group.objects.filter(is_published=True, id=transaction.group_id)
         check = request.POST['transaction_id']
-        games = Game.objects.filter(is_over=False)
+        games = Game.objects.filter(is_over=False, group_id=transaction.group_id)
 
         context = {
             'transaction': transaction,

@@ -42,5 +42,5 @@ def worker():
 
 while True:
     worker()
-    time.sleep(20)
+    time.sleep(60)
     print("Worker running")
