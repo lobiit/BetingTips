@@ -39,7 +39,7 @@ from core.models import *
 def home(request):
 
     current_customer = request.user
-    transaction = PaymentTransaction.objects.filter(customer=current_customer, is_deleted=False).last()
+    transaction = PaymentTransaction.objects.filter(customer=current_customer, isSuccessFull=True, is_deleted=False).last()
     if transaction:
 
         group = Group.objects.filter(is_published=True, id=transaction.group_id)

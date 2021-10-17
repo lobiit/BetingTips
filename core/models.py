@@ -16,37 +16,12 @@ import datetime
 
 # Create your models here.
 
-# class Membership(models.Model):
-#     MEMBERSHIP_CHOICES = (
-#         ('Daily', 'daily'),
-#         ('Weekly', 'weekly'),
-#         ('HT/FT', 'ht/ft'),
-#         ('Correct', 'correct'),
-#         ('Sportpesa_Midweek', 'sportpesa_midweek'),
-#         ('Sportpesa_Mega', 'sportpesa_mega'),
-#         ('Betika_Midweek', 'betika_midweek'),
-#         ('Betika_Mega', 'betika_mega'),
-#     )
-#     slug = models.SlugField(null=True, blank=True)
-#     membership_type = models.CharField(
-#         choices=MEMBERSHIP_CHOICES, default='Daily',
-#         max_length=30
-#     )
-#     price = models.DecimalField(default=0)
-#
-#     def __str__(self):
-#         return self.membership_type
-
 class customer(AbstractBaseUser, PermissionsMixin):
     phone_number = models.CharField(_('Phone Number:2547XXXXXXXX'), max_length=100, unique=True)
     email = models.EmailField(max_length=200, blank=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
-
-    # membership = models.ForeignKey(Membership, related_name='user_membership', on_delete=models.SET_NULL, null=True)
-    # membership = models.CharField(max_length=100, null=True)
-    # id = models.AutoField(primary_key=True)
 
     USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = ['email']
@@ -116,7 +91,6 @@ class PaymentTransaction(models.Model):
     date_expired = models.DateTimeField(null=True)
 
     def __str__(self):
-
         return "{} {}".format(self.phone_number, self.amount)
 
 
@@ -129,11 +103,3 @@ class Wallet(BaseModel):
 
     def __str__(self):
         return self.phone_number
-
-#
-# class Subscription(models.Model):
-#     user_membership = models.ForeignKey(customer, related_name='subscription', on_delete=models.CASCADE)
-#     active = models.BooleanField(default=True)
-#
-#     def __str__(self):
-#         return self.user_membership.user.username
