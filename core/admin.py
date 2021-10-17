@@ -42,8 +42,8 @@ class GroupAdmin(admin.ModelAdmin):
 
 class PaymentTransactionAdmin(admin.ModelAdmin):
     list_display = ("phone_number", "amount", "isFinished",
-                    "isSuccessFull", "trans_id", 'date_created', 'date_modified')
-    list_filter = ('isSuccessFull', 'date_created')
+                    "isSuccessFull", "trans_id", 'date_created', 'date_expired', 'is_deleted')
+    list_filter = ('isSuccessFull', 'date_created', 'is_deleted')
     list_per_page = 30
     search_fields = ('phone_number',)
 

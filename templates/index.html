@@ -1,6 +1,8 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% block content%}
+
 
 <head>
     <meta charset="utf-8">
@@ -34,38 +36,10 @@
 
 
 <body>
-    <div class="container-fluid" id="topContent">
+   <!-- <div class="container-fluid" id="topContent">
         <p class="mx-auto"><span class="w3-text-white p-1">Call Us : <a href="tel:0727405963">0727405963 </a> | <a href="tel:0707119271">0707119271</a></span></p>
-    </div>
+    </div>-->
 
-    <nav class="navbar navbar-inverse" id="app-navbar" style="border-style: none;">
-    <div class="container-fluid">
-    <!-- <p class="w3-text-white" style="width: 100%;" style="font-weight:500"><i class="fa fa-phone"></i> : 0742 884 997 / 0754 281 001</p> -->
-        <a class="navbar-brand" href="/">
-        </a>
-{% if not request.user.is_authenticated  %}
-        <div class="" id="navcol-1">
-            <ul class="nav navbar-nav ml-auto">
-            <!-- <li>
-                <span class="w3-text-white" style="padding-right:50px;font-weight:500"><i class="fa fa-phone"></i> : 0742 884 997 / 0754 281 001</span>
-            </li> -->
-                <li class="nav-item">
-                    <a href="sign-in/" class="active btn bg-info text-white">
-                        Login
-                    </a>
-                </li>
-
-
-                <li class="nav-item"></li>
-            </ul>
-        </div>
-{% else %}
-    <form class="form-inline">
-      <a href="/sign-out" class="btn btn-info" style="color: white">Sign Out</a>
-    </form>
-{% endif %}
-    </div>
-    </nav>
 
 <style>
 
@@ -120,16 +94,18 @@
  {% if games %}
     <div class="container home-past">
         <h2 class="text-uppercase past-tips-title" style="color: black">Past Winning Tips</h2>
-         {% for game in games %}
+
                     <div class="past-tips px-3 py-3 shadow-lg" style="background-color: steelblue">
-                <h2 class="text-white w3-xlarge" style="font-family: 'Space Mono', monospace; color: black">{{ game.date.date }}</h2>
+
                 <div class="col-md-12 search-table-col">
                     <!-- <h3 class="text-white" style="font-family: Montserrat, sans-serif;">VIP Tips<span class="float-right text-danger total-odds">Total Odds: 357.98</span></h3> -->
                     <div class="table-responsive table table-hover table-borderless results" >
                                                     <table class="table table-hover" style="background-color: steelblue">
+
                                 <thead class="bill-header cs" style="color: black; background-color: steelblue">
+
                                     <tr>
-                                        <th id="trs-hd">&nbsp;No.</th>
+
                                         <th id="trs-hd">Game Id</th>
                                         <th id="trs-hd">Teams</th>
                                         <th id="trs-hd">Tip</th>
@@ -141,14 +117,15 @@
                                 </thead>
                                     <tbody>
 
+                                                            {% for game in games %}
 
                                         <tr style="color: black">
 
-                                            <!--<td>{{ game.number }}</td>-->
-                                            <td>{{ game.game_id }}</td>
+
+                                            <td>{{ game.number }}</td>
                                             <td>{{ game.home_team }} - {{ game.away_team }}</td>
+
                                             <td>{{ game.tip }}</td>
-                                            <td>{{ game.date.date }}</td>
                                             <td>{{ game.time.time }}</td>
                                             <td>{{ game.results }}</td>
                                             <td><i class="fa fa-check-circle tick-icon"></i></td>
@@ -164,7 +141,7 @@
 
                                                         </table>
                     </div>
-                    <!-- <p class="text-white">Total Odds: 5178.1192192728 </p> -->
+
                 </div>
     </div>
     </div>
@@ -203,4 +180,4 @@
   </script>
 </body>
 
-</html>
+{% endblock %}

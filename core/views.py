@@ -37,15 +37,32 @@ from core.models import *
 # Create your views here.
 @login_required(login_url="/sign-in/")
 def home(request):
-    games = Game.objects.order_by('date').filter(is_over=True)
-    group = Group.objects.filter(is_published=True)
-    customers = customer.objects.all
-    context = {
-        'games': games,
-        'group': group,
-        'customer': customer
-    }
-    return render(request, 'index.html', context)
+
+    current_customer = request.user
+    transaction = PaymentTransaction.objects.filter(customer=current_customer, is_deleted=False).last()
+    if transaction:
+
+        group = Group.objects.filter(is_published=True, id=transaction.group_id)
+        games = Game.objects.filter(is_over=False, group_id=transaction.group_id)
+        context = {
+            'transaction': transaction,
+            'games': games,
+            'group': group,
+            'customer': customer.objects.all()
+        }
+
+        return render(request, 'profile.html', context)
+    else:
+        games = Game.objects.order_by('date').filter(is_over=True, won=True)
+        group = Group.objects.filter(is_published=True)[:20]
+        customers = customer.objects.all()
+        context = {
+            'games': games,
+            'group': group,
+            'customer': customer
+        }
+
+        return render(request, 'index.html', context)
 
 
 @login_required(login_url="/sign-in/")
