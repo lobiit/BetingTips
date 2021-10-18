@@ -17,7 +17,7 @@ import datetime
 # Create your models here.
 
 class customer(AbstractBaseUser, PermissionsMixin):
-    phone_number = models.CharField(_('Phone Number:2547XXXXXXXX'), max_length=100, unique=True)
+    phone_number = models.CharField(_('Phone Number'), max_length=100, unique=True)
     email = models.EmailField(max_length=200, blank=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
