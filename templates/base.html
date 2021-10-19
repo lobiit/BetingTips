@@ -18,7 +18,16 @@
   {% block head %}{% endblock %}
 </head>
 
-<body>
+<body class="{% spaceless %}
+    {% if theme == 'dark' %}
+        dark-theme
+    {% elif theme == 'light' %}
+        light-theme
+    {% else %}
+        system-theme
+    {% endif %}
+
+{% endspaceless %}">
   <nav class="navbar {% if not request.user.is_authenticated %} navbar-expand-lg {% endif%} navbar-light " style="background-color: steelblue">
     <a class="navbar-brand" href="/" style="color: yellow">Home</a>
 

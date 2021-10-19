@@ -12,6 +12,7 @@ from django.utils import timezone
 from .managers import CustomUserManager
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 import datetime
+import phonenumbers
 
 
 # Create your models here.
@@ -28,14 +29,17 @@ class customer(AbstractBaseUser, PermissionsMixin):
 
     objects = CustomUserManager()
 
-    def __str__(self):
+    def __str__(self, phone_number=None):
+        phonenumbers.format_number(phone_number, phonenumbers.PhoneNumber())
+        u'111222333333'
+
         return self.phone_number
 
 
 class Group(models.Model):
     title = models.CharField(max_length=100)
     amount = models.CharField(max_length=10)
-    number = models.IntegerField()
+    number_of_games = models.IntegerField()
     days = models.IntegerField(default=1)
     is_published = models.BooleanField(default=True)
     odds = models.CharField(max_length=100, default=14)
