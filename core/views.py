@@ -30,7 +30,6 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.conf import settings
 import datetime
-import phonenumbers
 from core.models import *
 
 
@@ -91,7 +90,7 @@ def sign_up(request):
 def profile_page(request):
     if request.method == 'POST':
         current_customer = request.user
-        transaction = PaymentTransaction.objects.filter(customer=current_customer,isSuccessFull=True, is_deleted=False).last()
+        transaction = PaymentTransaction.objects.filter(customer=current_customer, isSuccessFull=True, is_deleted=False).last()
         group = Group.objects.filter(is_published=True, id=transaction.group_id)
         check = request.POST['transaction_id']
         games = Game.objects.filter(is_over=False, group_id=transaction.group_id)

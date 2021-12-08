@@ -66,7 +66,7 @@
                                 {% csrf_token %}
                             <ul class="list-unstyled mb-4">
                                                                     <li style="font-family: Montserrat, sans-serif; color: black;" > + {{ x.odds }} Odds</li>
-                                                                <li style="font-family: Montserrat, sans-serif; color: black;"> Upto {{ x.number }} Games</li>
+                                                                <li style="font-family: Montserrat, sans-serif; color: black;"> Upto {{ x.number_of_games }} Games</li>
                             </ul>
                                 {% if request.user.is_authenticated  %}
                                 <input type="hidden" value="{{ user.phone_number }}" name="phone_number">
